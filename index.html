@@ -27,6 +27,7 @@
   </head>
 
   <body>  
+    <script type="text/x-handlebars" id="application">
     <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -40,21 +41,8 @@
       </div>
     </div>
 
-    <script type="text/x-handlebars" id="application">
-    <div class="container">
+    {{outlet}}
 
-      <div class="row row-offcanvas row-offcanvas-right">
-
-        <div class="col-xs-12 col-sm-9">
-
-          {{outlet}}
-
-          <footer>
-            <p>&copy; Matt Merkes 2013</p>
-          </footer>
-        </div>
-      </div>
-    </div>
     </script>
 
     <script type="text/x-handlebars" id="index">
@@ -62,20 +50,34 @@
     </script>
 
     <script type="text/x-handlebars" id="posts">
-      <ul class="list-group">
-        {{#each post in controller}}
-          <li class="list-group-item">
-            {{#link-to 'post' post}}
-              {{post.title}}
-            {{/link-to}}
-          </li>
-        {{/each}}
-      </ul>
-      <div>Users: {{postsCount}} </div>
-      <br>
+    <div class="container">
 
-      {{outlet}}
+      <div class="row-offcanvas row-offcanvas-right">
 
+        <div class="col-xs-12 col-sm-9">
+          {{outlet}}
+
+          <footer>
+            <p>&copy; Matt Merkes 2013</p>
+          </footer>
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="list-group" id="link_list">
+          <ul>
+          {{#each post in controller}}
+            <li class="list-group-item">
+              {{#link-to 'post' post}}
+                {{post.title}}
+              {{/link-to}}
+            </li>
+          {{/each}}
+          </ul>
+        </div>
+        <div>Users: {{postsCount}} </div>
+      </div>
+    </div>
     </script>
 
     <script type="text/x-handlebars" id="post">
@@ -86,7 +88,15 @@
         <p>{{tags}}</p>
         <p> Created {{creationDate}}</p>
         <button class="btn btn-primary" {{action 'edit'}}>Edit</button>
+        <button class="btn btn-primary" {{action "delete"}}>Delete</button>
       </div>
+      {{#if deleteMode}}
+      <div class="confirm-box">
+        <h4>Really?</h4>
+        <button {{action "confirmDelete"}}> yes </button>
+        <button {{action "cancelDelete"}}> no </button>
+      </div>
+      {{/if}}
     </script>
 
     <script type="text/x-handlebars" id="post/edit">
@@ -99,13 +109,14 @@
 
         <label>Tags</label>
         {{input value=tags}}
+        <button class="btn btn-primary" {{action "save"}}> Save </button>
       </div>
     </script>
 
     <!-- side bar
-    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+    
         //links to other posts
-        <div class="list-group" id="link_list">
+        
       </div>
     </div> -->
 
@@ -164,6 +175,7 @@
     <script src="js/routes/postRoute.js"></script>
     <script src="js/controllers/postController.js"></script>
     <script src="js/routes/postEditRoute.js"></script>
+    <script src="js/controllers/postEditController.js"></script>
 
     <script>
       function splitAndTrim(content) {
