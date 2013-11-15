@@ -79,11 +79,26 @@
     </script>
 
     <script type="text/x-handlebars" id="post">
-      <div>
+      {{outlet}}
+      <div class="post">
         <h3>{{title}}</h3>
         <p>{{post_content}}</p>
         <p>{{tags}}</p>
-        <span> Created {{creationDate}}</span>
+        <p> Created {{creationDate}}</p>
+        <button class="btn btn-primary" {{action 'edit'}}>Edit</button>
+      </div>
+    </script>
+
+    <script type="text/x-handlebars" id="post/edit">
+      <div class="post-edit">
+        <label>Title</label>
+        {{input value=title}}
+
+        <label>Content</content>
+        {{textarea value=post_content cols="80" rows="15"}}
+
+        <label>Tags</label>
+        {{input value=tags}}
       </div>
     </script>
 
@@ -148,6 +163,7 @@
     <script src="js/routes/indexRoute.js"></script>
     <script src="js/routes/postRoute.js"></script>
     <script src="js/controllers/postController.js"></script>
+    <script src="js/routes/postEditRoute.js"></script>
 
     <script>
       function splitAndTrim(content) {
