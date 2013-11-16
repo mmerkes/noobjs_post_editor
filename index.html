@@ -67,7 +67,7 @@
       </div>
 
       <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-        <div id="link_list">
+        <div class="link_list">
           <ul class="nav nav-pills nav-stacked">
           {{#each post in controller}}
             {{#link-to 'post' post tagName="li"}}
@@ -76,6 +76,7 @@
           {{/each}}
           </ul>
         </div>
+        {{#link-to "posts.create" class="btn btn-info create-post" tagName="button"}}Add post{{/link-to}}
         <div class="postsCount">Users: {{postsCount}} </div>
       </div>
     </div>
@@ -179,6 +180,8 @@
     <script src="js/controllers/postController.js"></script>
     <script src="js/routes/postEditRoute.js"></script>
     <script src="js/controllers/postEditController.js"></script>
+    <script src="js/controllers/postsCreateController.js"></script>
+    <script src="js/routes/postsCreateRoute.js"></script>
 
     <script>
       function splitAndTrim(content) {

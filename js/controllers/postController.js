@@ -1,5 +1,13 @@
 App.PostController = Ember.ObjectController.extend({
 
+	modelUpdater: function() {
+		var tags = this.get('model.tags');
+		if(!(tags instanceof Array)) {
+			tags = (this.get('model.tags') || "").split(',');
+		}
+		this.set('model.tags', tags);
+	}.observes('model.tags'),
+
 	actions: {
 		edit: function() {
 			this.transitionToRoute('post.edit');
