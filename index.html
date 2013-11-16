@@ -16,6 +16,9 @@
     <!-- Custom styles for this template -->
     <link href="css/offcanvas.css" rel="stylesheet">
 
+    <!-- Custom styles for post_editor -->
+    <link href="css/post_editor.css" rel="stylesheet">
+
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -64,18 +67,16 @@
       </div>
 
       <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-        <div class="list-group" id="link_list">
-          <ul>
+        <div id="link_list">
+          <ul class="nav nav-pills nav-stacked">
           {{#each post in controller}}
-            <li class="list-group-item">
-              {{#link-to 'post' post}}
-                {{post.title}}
-              {{/link-to}}
-            </li>
+            {{#link-to 'post' post tagName="li"}}
+              <a href="#">{{post.title}}</a>
+            {{/link-to}}
           {{/each}}
           </ul>
         </div>
-        <div>Users: {{postsCount}} </div>
+        <div class="postsCount">Users: {{postsCount}} </div>
       </div>
     </div>
     </script>
@@ -83,9 +84,11 @@
     <script type="text/x-handlebars" id="post">
       {{outlet}}
       <div class="post">
-        <h3>{{title}}</h3>
+        <h3><span class="label label-default">{{title}}</span></h3>
         <p>{{post_content}}</p>
-        <p>{{tags}}</p>
+        {{#each tag in tags}}
+          <button class="btn btn-info">{{tag}}</button>
+        {{/each}}
         <p> Created {{creationDate}}</p>
         <button class="btn btn-primary" {{action 'edit'}}>Edit</button>
         <button class="btn btn-primary" {{action "delete"}}>Delete</button>
