@@ -3,6 +3,8 @@ App.PostController = Ember.ObjectController.extend({
 	modelUpdater: function() {
 		var tags = this.get('model.tags');
 		if(!(tags instanceof Array)) {
+			// remove whitespace and make into an array
+			// .replace(/ /g, '')
 			tags = (this.get('model.tags') || "").split(',');
 		}
 		this.set('model.tags', tags);
