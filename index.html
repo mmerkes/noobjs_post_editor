@@ -86,11 +86,11 @@
       {{outlet}}
       <div class="post">
         <h3><span class="label label-default">{{title}}</span></h3>
-        <p>{{post_content}}</p>
+        <p>{{formatMarkdown post_content}}</p>
         {{#each tag in tags}}
           <button class="btn btn-info">{{tag}}</button>
         {{/each}}
-        <p> Created {{creationDate}}</p>
+        <p> Created {{formatDate creationDate}}</p>
         <button class="btn btn-primary" {{action 'edit'}}>Edit</button>
         <button class="btn btn-primary" {{action "delete"}}>Delete</button>
       </div>
@@ -116,26 +116,6 @@
         <button class="btn btn-primary" {{action "save"}}> Save </button>
       </div>
     </script>
-
-    <!-- side bar
-    
-        //links to other posts
-        
-      </div>
-    </div> -->
-
-    <!-- post template
-    <div class="row" id="preview">
-            <h2 id="title"></h2>
-            <div id="content">
-
-            </div>
-            <br />
-            <div id="tag">
-
-            </div>
-          </div> -->
-
 
     <script id="link_template" type="text/template">
       <a href="#<%= id %>" class="list-group-item"><%= title %></a>
@@ -166,7 +146,8 @@
     <script src="js/libs/ember.js"></script>
     <script src="js/libs/ember-data.js"></script>
     <script src="js/libs/localstorage_adapter.js"></script>
-    <script src="node_modules/moment/moment.js"></script>
+    <script src="js/libs/moment.js"></script>
+    <script src="js/libs/showdown.min.js"></script>
 
     <!-- App js files -->
     <script src="js/app.js"></script>
@@ -182,6 +163,7 @@
     <script src="js/controllers/postEditController.js"></script>
     <script src="js/controllers/postsCreateController.js"></script>
     <script src="js/routes/postsCreateRoute.js"></script>
+    <script src="js/helpers/helpers.js"></script>
 
     <script>
       function splitAndTrim(content) {
