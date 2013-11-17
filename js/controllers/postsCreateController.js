@@ -6,6 +6,7 @@ App.PostsCreateController = Ember.ObjectController.extend({
 
 			// create a record and save it to the store
 			var newPost = this.store.createRecord('post', this.get('model'));
+
 			newPost.save();
 
 			// redirects to post itself
