@@ -73,7 +73,7 @@ app.post( '/posts', function( request, response ) {
                 }
             });
 
-            return response.send(post);
+            return response.send({ "post": post });
         }
     });
 });
