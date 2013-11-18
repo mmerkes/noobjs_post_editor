@@ -1,7 +1,5 @@
 // Module dependencies.
 var application_root = __dirname,
-    async = require( 'async' ),
-    _ = require( 'underscore' ), // Underscore
     express = require( 'express' ), //Web framework
     path = require( 'path' ), //Utilities for dealing with file paths
     mongoose = require( 'mongoose' ); //MongoDB integration

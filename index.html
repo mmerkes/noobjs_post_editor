@@ -115,6 +115,7 @@
     <script id="link_template" type="text/template">
       <a href="#<%= id %>" class="list-group-item"><%= title %></a>
     </script>
+    
     <script id="edit_view" type="text/template">
       <div class="row" id="edit-view">
         <div class="input-group">
@@ -149,54 +150,19 @@
     <script src="js/store.js"></script>
     <script src="js/models/post.js"></script>
     <script src="js/router.js"></script>
-    <script src="js/routes/postsRoute.js"></script>
-    <script src="js/controllers/postsController.js"></script>
-    <script src="js/routes/indexRoute.js"></script>
-    <script src="js/routes/postRoute.js"></script>
-    <script src="js/controllers/postController.js"></script>
-    <script src="js/routes/postEditRoute.js"></script>
-    <script src="js/controllers/postEditController.js"></script>
-    <script src="js/controllers/postsCreateController.js"></script>
-    <script src="js/routes/postsCreateRoute.js"></script>
     <script src="js/helpers/helpers.js"></script>
 
-    <script>
-      function splitAndTrim(content) {
-        return _.map(content.split(','), function(item) {
-          return item.trim();
-        });
-      }
+    <!-- Routes -->
+    <script src="js/routes/postsRoute.js"></script>
+    <script src="js/routes/indexRoute.js"></script>
+    <script src="js/routes/postRoute.js"></script>
+    <script src="js/routes/postEditRoute.js"></script>
+    <script src="js/routes/postsCreateRoute.js"></script>
 
-      function convertTags(content) {
-        return _.map(splitAndTrim(content), function(item) {
-          return '<button class="btn btn-info btn-sm">' + item + '</button>';
-        });
-      }
-
-      function processTags(content) {
-        return _.reduce(convertTags(content), function(memo, value) {
-          return memo + value;
-        });
-      }
-
-      function copycat(editable, view, callback) {
-        editable.keyup( function() {
-          var values;
-          if (callback) {
-            content = callback(editable.val());
-          } else {
-            content = editable.val();
-          }
-          view.html(content);
-        });
-      }
-
-      $(document).ready(function() {
-        // update preview in real-time
-        copycat($('#title_edit'), $('#title'));
-        copycat($('#content_edit'), $('#content'));
-        copycat($('#tag_edit'), $('#tag'), processTags);
-      });
-    </script>
+    <!-- Controllers -->
+    <script src="js/controllers/postsController.js"></script>
+    <script src="js/controllers/postController.js"></script>  
+    <script src="js/controllers/postEditController.js"></script>
+    <script src="js/controllers/postsCreateController.js"></script> 
   </body>
 </html>
