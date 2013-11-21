@@ -76,12 +76,16 @@
     <script type="text/x-handlebars" id="post">
       {{outlet}}
       <div class="post">
-        <h3><span class="label label-default">{{title}}</span></h3>
+        <h2><span class="label label-default">{{title}}</span></h2>
         <div>{{formatMarkdown post_content}}</div>
         {{#each tag in tags}}
           <button class="btn btn-info">{{tag}}</button>
         {{/each}}
         <p> Created {{formatDate creationDate}}</p>
+        <p> By {{author}} </p>
+        {{#if complete}}
+          <p> This post is marked complete </p>
+        {{/if}}
         <button class="btn btn-primary" {{action 'edit'}}>Edit</button>
         <button class="btn btn-primary" {{action "delete"}}>Delete</button>
       </div>
@@ -107,6 +111,12 @@
         <label>Tags</label>
         {{input class="form-control" value=tags}}
         <br>
+        <label>Author</label>
+        {{input class="form-control" value=author}}
+        <br>
+        <label>Complete</label>
+        {{input type="checkbox" name="complete" checked=complete}}
+        <br><br>
 
         <button class="btn btn-primary" {{action "save"}}> Save </button>
       </div>
@@ -115,7 +125,7 @@
     <script id="link_template" type="text/template">
       <a href="#<%= id %>" class="list-group-item"><%= title %></a>
     </script>
-    
+
     <script id="edit_view" type="text/template">
       <div class="row" id="edit-view">
         <div class="input-group">
@@ -141,7 +151,6 @@
     <script src="js/libs/handlebars-1.0.0.js"></script>
     <script src="js/libs/ember.js"></script>
     <script src="js/libs/ember-data.js"></script>
-    <script src="js/libs/localstorage_adapter.js"></script>
     <script src="js/libs/moment.js"></script>
     <script src="js/libs/showdown.min.js"></script>
 

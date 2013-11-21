@@ -12,7 +12,9 @@ var Post = new mongoose.Schema({
     title: String,
     post_content: String,
     tags: [ String ],
-    creationDate: Date
+    creationDate: Date,
+    author: String,
+    complete: Boolean
 });
 
 //Models
@@ -60,7 +62,9 @@ app.post( '/posts', function( request, response ) {
                 title: req.title,
                 post_content: req.post_content,
                 tags: req.tags,
-                creationDate: req.creationDate
+                creationDate: req.creationDate,
+                author: req.author,
+                complete: req.complete
             });
 
             post.save( function( err ) {
@@ -109,6 +113,8 @@ app.put( '/posts/:id', function(request, response) {
         post.post_content = request.body.post.post_content;
         post.tags = request.body.post.tags;
         post.creationDate = request.body.post.creationDate;
+        post.author = request.body.post.author;
+        post.complete = request.body.post.complete;
 
         return post.save( function( err ) {
             if( !err ) {
