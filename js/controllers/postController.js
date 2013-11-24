@@ -15,7 +15,7 @@ App.PostController = Ember.ObjectController.extend({
 			this.transitionToRoute('post.edit');
 		},
 		delete: function(){
-	      	// our delete method now only toggles deleteMode's value
+	      	// delete method toggles deleteMode's value
 	      	this.toggleProperty('deleteMode');
 	    },
 	    cancelDelete: function(){
@@ -23,10 +23,10 @@ App.PostController = Ember.ObjectController.extend({
 	      	this.set('deleteMode', false);
 	    },
 	    confirmDelete: function(){
-	      	// this tells Ember-Data to delete the current user
+	      	// tell Ember-Data to delete the current post
 	      	this.get('model').deleteRecord();
 	      	this.get('model').save();
-	      	// and then go to the users route
+	      	// and then go to the posts route
 	      	this.transitionToRoute('posts');
 	      	// set deleteMode back to false
 	      	this.set('deleteMode', false);

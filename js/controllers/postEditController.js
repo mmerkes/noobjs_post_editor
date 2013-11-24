@@ -4,7 +4,7 @@ App.PostEditController = Ember.ObjectController.extend({
       var post = this.get('model');
       // this will tell Ember-Data to save/persist the new record
       post.save();
-      // then transition to the current user
+      // then transition to the current post
       this.transitionToRoute('post', post);
     }
   }
