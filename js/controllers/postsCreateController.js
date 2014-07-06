@@ -9,8 +9,11 @@ App.PostsCreateController = Ember.ObjectController.extend({
 
 			newPost.save();
 
-			// redirects to post itself
-			this.transitionToRoute('post', newPost);
+			// verify that the post was created before routing
+			newPost.one('didCreate', this, function() {
+				// redirects to post itself
+				this.transitionToRoute('post', newPost);
+			});
 		}
 	}
 });

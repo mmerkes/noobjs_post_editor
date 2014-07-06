@@ -78,6 +78,7 @@
       <div class="post">
         <h2><span class="label label-default">{{title}}</span></h2>
         <div>{{formatMarkdown post_content}}</div>
+        <p>{{snippet}}</p>
         {{#each tag in tags}}
           <button class="btn btn-info">{{tag}}</button>
         {{/each}}
@@ -107,7 +108,9 @@
         <label>Content</content>
         {{textarea class="form-control" value=post_content cols="120" rows="10"}}
         <br>
-
+        <label>Snippet</label>
+        {{textarea class="form-control" value=snippet cols="120"}}
+        <br>
         <label>Tags</label>
         {{input class="form-control" value=tags}}
         <br>
